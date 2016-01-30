@@ -1,0 +1,45 @@
+doctype html
+html
+    head
+        meta(charset='utf-8')     
+        meta(http-equiv='X-UA-Compatible', content='IE=Edge')    
+        meta(content='user-scalable=0', name='viewport')  
+        script(src='/static/lib/jquery.min.js')
+        script(src='/static/lib/avalon.shim.min.js')
+        link(type='text/css', rel='stylesheet', href='/static/common/common.entry.css')
+        block title
+            title Mini Library For AC
+        block styles
+            // page styles
+
+    body
+        .loading-bar
+
+        block header
+            // header 
+            header.header.clearfix
+                .container
+                    span.logo Mini Library For AC
+                    ul.nav-list(ms-if)
+                        li.nav-search-input.nav-auto.nav-disabled
+                            input(type="text" placeholder="随便输入什么进行搜索..")
+                        li.nav-search.nav-auto.nav-disabled
+                            i.fa.fa-search
+                        li.nav-index
+                            a(href="/") 书架
+                        li.nav-about
+                            a(href="/about") 关于
+                        
+
+        block content
+            // content 
+
+        block footer
+            // footer 
+            footer.footer
+                small Mini Library For AC@2015-2016 By Edward v0.2.0
+
+         
+        script(src='/static/common/common.entry.js')
+        block scripts
+            // page scripts

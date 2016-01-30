@@ -1,0 +1,55 @@
+extends ../common/base.jade
+
+block content
+  section.container.panel.pdt-90
+    // 系统及开发人员简介
+    h2.panel-title
+      i.fa.fa-cogs
+      |  简介 - Introduction
+    p 这是ACers自己的小图书馆，书架躺在四层的右侧的角落里。
+
+  section.container.panel
+    // 更新日志
+    h2.panel-title
+      i.fa.fa-heartbeat
+      |  更新日志 - Updates Logs
+    
+    // 2015-12-23
+    .update-report
+      h5.text-date.update-date 2015-12-23
+      p.update-event
+        i.fa.fa-angle-double-right
+        |  添加关于About页面
+      p.update-event
+        i.fa.fa-angle-double-right
+        |  更新了部分font-awesome图标
+    
+    // 2015-12-24
+    .update-report
+      h5.text-date.update-date 2015-12-24
+      p.update-event
+        i.fa.fa-angle-double-right
+        |  添加图书现在支持导入Excel表格
+      p.update-event
+        i.fa.fa-angle-double-right
+        |  添加'出版社'字段
+      p.update-event
+        i.fa.fa-angle-double-right
+        |  首页现在可以搜索啦
+    
+    // 2016-01-28
+    .update-report
+      h5.text-date.update-date 2016-01-28
+      p.update-event
+        i.fa.fa-angle-double-right
+        |  拖了一个月的工作重启了, 整理了一下架构。
+
+    // 2016-01-29
+    .update-report
+      h5.text-date.update-date 2016-01-29
+      p.update-event
+        i.fa.fa-angle-double-right
+        |  下拉加载complete！
+      p.update-event
+        i.fa.fa-angle-double-right
+        |  搜索功能更新

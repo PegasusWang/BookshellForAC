@@ -1,0 +1,29 @@
+extends ../common/base.jade
+
+block styles
+  link(type='text/css', rel='stylesheet', href='/static/index/index.entry.css')
+
+block content
+    section.container.pdt-60(ms-controller="book_list")
+        table.book-list(ms-if="!searching")
+            tr.book(ms-repeat="data")
+                td 
+                    h3 {{el.title}}
+                    small {{el.author}}
+                td {{el.press}}
+                td {{el.category}}
+                td(ms-class="unavailable: el.count<1") {{el.count}}
+
+        table.search-results(ms-if="searching")
+            tr.book(ms-repeat="search_data")
+                td 
+                    h3 {{el.title}}
+                    small {{el.author}}
+                td {{el.press}}
+                td {{el.category}}
+                td(ms-class="unavailable: el.count<1") {{el.count}}
+    
+block scripts
+    script(src='/static/index/index.entry.js')
+    script.
+        window.render_book_list(!{data_books})

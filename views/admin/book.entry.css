@@ -1,0 +1,47 @@
+.addbook .panel {
+  float: left;
+  width: 350px; }
+  .addbook .panel:first-child {
+    margin-right: 60px; }
+
+.addbook .fa-spinner {
+  display: none;
+  margin-left: 10px;
+  -webkit-animation: ac-rotate 2.5s linear infinite;
+  -moz-animation: ac-rotate 2.5s linear infinite;
+  animation: ac-rotate 2.5s linear infinite; }
+  .addbook .fa-spinner:before {
+    width: 16px;
+    height: 16px; }
+
+.addbook .fa-check-circle {
+  display: none;
+  margin-left: 10px; }
+  .addbook .fa-check-circle:before {
+    margin-right: 3px; }
+
+@-webkit-keyframes ac-rotate {
+  0% {
+    -webkit-transform: rotate(0);
+    transform: rotate(0); }
+  100% {
+    -webkit-transform: rotate(-360deg);
+    transform: rotate(-360deg); } }
+
+@-moz-keyframes ac-rotate {
+  0% {
+    -moz-transform: rotate(0);
+    transform: rotate(0); }
+  100% {
+    -moz-transform: rotate(-360deg);
+    transform: rotate(-360deg); } }
+
+@keyframes ac-rotate {
+  0% {
+    -webkit-transform: rotate(0);
+    -moz-transform: rotate(0);
+    transform: rotate(0); }
+  100% {
+    -webkit-transform: rotate(-360deg);
+    -moz-transform: rotate(-360deg);
+    transform: rotate(-360deg); } }

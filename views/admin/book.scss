@@ -1,0 +1,33 @@
+.addbook {
+    .panel {
+        float: left;
+        width: 350px;
+        &:first-child {
+            margin-right: 60px;
+        }
+    }
+    
+    .fa-spinner {
+        display: none;
+        margin-left: 10px;
+        animation: ac-rotate 2.5s linear infinite;
+        &:before {
+            width: 16px;
+            height: 16px;
+        }
+    }
+    
+    .fa-check-circle {
+        display: none;
+        margin-left: 10px;
+        &:before {
+            margin-right: 3px;
+        }
+    }
+}
+
+@keyframes ac-rotate
+{
+    0% { transform: rotate(0); }
+    100% { transform: rotate(-360deg); }
+}
