@@ -13,6 +13,10 @@ angular2 or react or avalon 前端框架
 图书借阅
 申请购书
 
+#### 想要做的
+图书列表页的滚动加载 not 翻页
+
+
 
 
 

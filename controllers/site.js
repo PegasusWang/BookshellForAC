@@ -5,21 +5,34 @@ var xlsx = require('node-xlsx');
 var db = require('../models/db');
 var Book = db.Book;
 
-// '/'
+// '/' 首页
 exports.index = function (req, res) {
-    Book.find(function(err, books) {
+    Book.find().skip(0).limit(30).exec(function(err, books) {
         if (err) throw err;
-        console.log();
         res.render('index/index', {data_books: JSON.stringify(books)});
     });
 };
 
-// '/admin'
+// '/loadmore' 滚动加载
+exports.loadMore = function (req, res) {
+    var skip = 0;
+
+    if(req.body.skip) {
+        skip = parseInt(req.body.skip);
+    }
+
+    Book.find().skip(skip).limit(30).exec(function(err, books) {
+        if (err) throw err;
+        res.json( {data_books: books} );
+    });
+}
+
+// '/admin' 管理
 exports.admin = function (req, res) {
     res.render('admin/book', {});
 };
 
-// '/admin/addbook'
+// '/admin/addbook' 添加图书
 exports.addBook = function (req, res) {
     // 生成数据obj
     var book = new Book({
@@ -40,7 +53,7 @@ exports.addBook = function (req, res) {
     });
 };
 
-// '/admin/excelimport'
+// '/admin/excelimport' 通过excel导入
 exports.importFromExcel = function (req, res) {
     var form = new multiparty.Form({ 'uploadDir': __dirname + '/../uploads' });
  
@@ -82,5 +95,30 @@ exports.importFromExcel = function (req, res) {
             res.end(util.inspect({fields: fields, files: files}));
         });
     });
+};
 
+// '/search' 搜索
+exports.search = function (req, res) {
+    var query = req.body.q;
+    var querySet = [];
+    var queryRegExp = new RegExp(".*?" + query + ".*?");
+    var feilds = ['title', 'author', 'intro', 'category', 'press'];
+
+    for (var i = 0; i < feilds.length; i++) {
+        var s = {};
+        s[feilds[i]] = queryRegExp;
+        querySet.push(s);
+    }
+
+    querySet = {'$or': querySet};
+
+    Book.find(querySet, function(err, books) {
+        if (err) throw err;
+        res.json( {data_books: books} );
+    });
+}
+
+// '/about' 关于
+exports.about = function (req, res) {
+    res.render('about/about', {});
 };
