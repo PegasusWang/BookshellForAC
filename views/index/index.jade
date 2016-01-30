@@ -9,18 +9,24 @@ block content
             tr.book(ms-repeat="data")
                 td 
                     h3 {{el.title}}
+                        small.tag.tag-green(ms-if="el.category == '产品' || el.category == '设计'") {{el.category}}
+                        small.tag.tag-red(ms-if="el.category == '财务' || el.category == '金融'") {{el.category}}
+                        small.tag.tag-blue(ms-if="el.category == '管理' || el.category == '运营'") {{el.category}}
+                        small.tag.tag-orange(ms-if="el.category == '计算机' || el.category == '文学'") {{el.category}}
                     small {{el.author}}
                 td {{el.press}}
-                td {{el.category}}
                 td(ms-class="unavailable: el.count<1") {{el.count}}
 
         table.search-results(ms-if="searching")
             tr.book(ms-repeat="search_data")
                 td 
                     h3 {{el.title}}
+                        small.tag.tag-green(ms-if="el.category == '产品' || el.category == '设计'") {{el.category}}
+                        small.tag.tag-red(ms-if="el.category == '财务' || el.category == '金融'") {{el.category}}
+                        small.tag.tag-blue(ms-if="el.category == '管理' || el.category == '运营'") {{el.category}}
+                        small.tag.tag-orange(ms-if="el.category == '计算机' || el.category == '文学'") {{el.category}}
                     small {{el.author}}
                 td {{el.press}}
-                td {{el.category}}
                 td(ms-class="unavailable: el.count<1") {{el.count}}
     
 block scripts

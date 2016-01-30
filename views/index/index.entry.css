@@ -7,7 +7,7 @@
   .book-list .book,
   .search-results .book {
     height: 70px;
-    border-bottom: 1px solid #f5f5f5;
+    border-bottom: 1px solid #F5F5F5;
     background-color: transparent;
     -webkit-transition: all ease-in-out .2s;
     -moz-transition: all ease-in-out .2s;
@@ -50,14 +50,14 @@
         background-color: #FF5722; }
     .book-list .book:hover,
     .search-results .book:hover {
-      background-color: #f5f5f5; }
+      background-color: #F5F5F5; }
       .book-list .book:hover td:last-child:before,
       .search-results .book:hover td:last-child:before {
         opacity: 1; }
 
 .nomore,
 .noresult {
-  color: #aaa;
+  color: #AAA;
   text-align: center;
   padding-top: 30px;
   font-size: 16px; }

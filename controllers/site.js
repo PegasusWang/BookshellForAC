@@ -75,15 +75,15 @@ exports.importFromExcel = function (req, res) {
                     var item = excelJson[0].data[i];
                     //console.log(item);
                     var book = new Book({
-                        'title': item[1],
-                        'author': item[2],
-                        'intro': item[3],
+                        'title': item[0],
+                        'author': item[1],
+                        'intro': item[2],
                         'read': 0,
-                        'last': item[4],
-                        'count': item[4],
-                        'category': item[5] || [],
-                        'press': item[6],
-                        'barcode': item[7],
+                        'last': item[3],
+                        'count': item[3],
+                        'category': item[4] || [],
+                        'press': item[5],
+                        'barcode': item[6],
                         'locate': []
                     });
                     book.save(function (err) {

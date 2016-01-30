@@ -1,7 +1,8 @@
 @import "reset.css";
+@import "colors.scss";
 
 body {
-  color: #333;
+  color: $light_black;
   line-height: 1.5em;
   font-family: 'Hiragino Sans GB', Helvetica, Arial, 'STHeiti', 'WenQuanYi Micro Hei', sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -55,7 +56,7 @@ body {
   
   .panel-title {
     font-weight: normal;
-    border-bottom: 1px dashed #f5f5f5;
+    border-bottom: 1px dashed $light_grey;
     line-height: 22px;
     padding-bottom: 5px;
     margin-bottom: 10px;
@@ -71,11 +72,11 @@ body {
       min-width: 300px;
       outline: none;
       border: none;
-      border-bottom: 1px solid #f5f5f5;
+      border-bottom: 1px solid $light_grey;
       transition: all ease-in-out .15s;
 
       &:focus {
-        border-bottom-color: #FF5722;
+        border-bottom-color: $ac_red;
       }
     }
     .aclib-form-tip {
@@ -93,7 +94,7 @@ body {
     margin-top: 20px;
     outline: none;
     border: none;
-    background-color: #FF5722;
+    background-color: $ac_red;
     cursor: pointer;
   }
 
@@ -105,24 +106,62 @@ body {
 
 /* iconfont 颜色*/
 .fa {
-  color: #FF5722;
+  color: $ac_red;
 }
 
 /* 提示文字 */
 .text-alert {
-  color: #FF5722;
+  color: $ac_red;
 }
 
 .text-success {
-  color: #8BC34A;
+  color: $light_green;
 }
 
 .text-disabled {
-  color: #999;
+  color: $light_black;
 }
 
 .text-date {
-  color: #2196F3;
+  color: $blue;
+}
+
+/* colorful tags */
+.tag {
+  position: relative;
+  top: -1px;
+  margin: 0 10px;
+  padding: 1px 2px 2px 2px;
+  border: 1px solid;
+  border-radius: 3px;
+  color: $grey;
+  font-size: 12px;
+  font-weight: normal;
+}
+
+.tag-red {
+  color: $ac_red;
+  border-color: lighten($ac_red, 20%);
+}
+
+.tag-green {
+  color: $light_green;
+  border-color: lighten($light_green, 20%);
+}
+
+.tag-deep-green {
+  color: $deep_green;
+  border-color: lighten($deep_green, 20%);
+}
+
+.tag-blue {
+  color: $blue;
+  border-color: lighten($blue, 20%);
+}
+
+.tag-orange {
+  color: $orange;
+  border-color: lighten($orange, 20%);
 }
 
 /* 隐藏 */
@@ -137,7 +176,7 @@ body {
   width: 0;
   height: 2px;
   z-index: 11;
-  background-color: #F44336;
+  background-color: $ac_red;
 }
 
 /* header */
@@ -178,15 +217,15 @@ body {
         border-right: none;
       }
       &.nav-active {
-        border-bottom: 1px solid #F44336;
+        border-bottom: 1px solid $ac_red;
       }
       &:hover {
-        background-color: #f5f5f5;
+        background-color: $light_grey;
       }
       &.nav-disabled {
-        color: #aaa;
+        color: $grey;
         cursor: default;
-        background-color: #fcfcfc;
+        background-color: $light_grey;
       }
       &.nav-auto {
         width: auto;
@@ -233,7 +272,7 @@ body {
 /* footer */
 .footer {
   text-align: center;
-  color: #aaa;
+  color: $grey;
   padding: 30px 0;
 }
 
