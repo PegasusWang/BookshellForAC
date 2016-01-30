@@ -37,6 +37,10 @@ app.post('/admin/excelimport', site.importFromExcel);
 // '/about'
 app.get('/about', site.about);
 
+// '/wechat'
+app.get('/wechat', wechat.validate);
+app.use('/wechat', wechat.wechatservice);
+
 // 启动服务并从指定端口监听连接请求
 app.listen('8080', function () {
     console.log(' listening at http://%s:%s', '127.0.0.1', '8080');
