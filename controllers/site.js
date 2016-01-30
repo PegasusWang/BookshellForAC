@@ -122,3 +122,8 @@ exports.search = function (req, res) {
 exports.about = function (req, res) {
     res.render('about/about', {});
 };
+
+// '/login' 登录
+exports.login = function (req, res) {
+    res.render('login/login', {});
+}

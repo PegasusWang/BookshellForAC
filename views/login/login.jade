@@ -1,0 +1,22 @@
+extends ../common/base.jade
+
+block styles
+  link(type='text/css', rel='stylesheet', href='/static/login/login.entry.css')
+
+block content
+    section.pdt-60
+        .login-box
+            .banner
+                h1 ANGELCRUNCH
+            .login-form.aclib-form
+                .aclib-form-item
+                    input(type="text" placeholder="用户名")
+                    i.aclib-form-tip.fa.fa-exclamation-triangle
+                .aclib-form-item
+                    input(type="password" placeholder="密码")
+                    i.aclib-form-tip.fa.fa-exclamation-triangle
+                .aclib-form-item
+                    input(type="submit" value="登录") 
+
+block scripts
+  script(src='/static/login/login.entry.js')

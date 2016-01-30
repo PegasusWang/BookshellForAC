@@ -10,10 +10,10 @@ $(document).ready ->
 
     activeTag = window.location.pathname.split('/')[1]
 
-    if not activeTag or activeTag is "index"
+    if not activeTag
         navBind("index")
-    else if activeTag is "about"
-        navBind("about")
+    else
+        navBind(activeTag)
 
     # 全局loading方法
     window.loading = (progress, speed)->

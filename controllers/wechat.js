@@ -1,3 +1,4 @@
+/* !!!! 已弃用微信模块 */
 var WXBizMsgCrypt = require('wechat-crypto');
 var wechat = require('wechat-enterprise');
 var db = require('../models/db');

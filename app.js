@@ -1,6 +1,6 @@
 var express     = require('express');
 var site        = require('./controllers/site');
-var wechat      = require('./controllers/wechat');
+// var wechat      = require('./controllers/wechat');
 var bodyParser  = require('body-parser');
 
 // 创建express实例
@@ -23,6 +23,9 @@ app.use(bodyParser.json());
 // '/' 
 app.get('/', site.index);
 
+// 'login'
+app.get('/login', site.login);
+
 // 'loadmore'
 app.post('/loadmore', site.loadMore);
 
@@ -34,12 +37,12 @@ app.get('/admin', site.admin);
 app.post('/admin/addbook', site.addBook);
 app.post('/admin/excelimport', site.importFromExcel);
 
-// '/about'
+// 'about'
 app.get('/about', site.about);
 
-// '/wechat'
-app.get('/wechat', wechat.validate);
-app.use('/wechat', wechat.wechatservice);
+// 'wechat' 已弃用
+// app.get('/wechat', wechat.validate);
+// app.use('/wechat', wechat.wechatservice);
 
 // 启动服务并从指定端口监听连接请求
 app.listen('8080', function () {

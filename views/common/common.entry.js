@@ -57,10 +57,10 @@
 	    return $nav.find(".nav-" + nav_class).addClass("nav-active");
 	  };
 	  activeTag = window.location.pathname.split('/')[1];
-	  if (!activeTag || activeTag === "index") {
+	  if (!activeTag) {
 	    navBind("index");
-	  } else if (activeTag === "about") {
-	    navBind("about");
+	  } else {
+	    navBind(activeTag);
 	  }
 	  return window.loading = function(progress, speed) {
 	    var $loadingbar, currentWidth;

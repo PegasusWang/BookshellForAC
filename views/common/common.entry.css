@@ -116,9 +116,10 @@ body {
     margin-bottom: 10px; }
 
 /* 表单样式 */
-.aclib-form .aclib-form-item input[type='text'] {
+.aclib-form .aclib-form-item input[type='text'],
+.aclib-form .aclib-form-item input[type='password'] {
   display: inline-block;
-  height: 35px;
+  height: 40px;
   min-width: 300px;
   outline: none;
   border: none;
@@ -126,19 +127,21 @@ body {
   -webkit-transition: all ease-in-out .15s;
   -moz-transition: all ease-in-out .15s;
   transition: all ease-in-out .15s; }
-  .aclib-form .aclib-form-item input[type='text']:focus {
+  .aclib-form .aclib-form-item input[type='text']:focus,
+  .aclib-form .aclib-form-item input[type='password']:focus {
     border-bottom-color: #FF5722; }
 
 .aclib-form .aclib-form-item .aclib-form-tip {
   margin-left: 10px;
   display: none; }
 
-.aclib-form input[type='button'] {
+.aclib-form input[type='button'],
+.aclib-form input[type='submit'] {
   height: 28px;
   min-width: 60px;
   color: #fff;
   font-weight: bold;
-  border-radius: 3px;
+  border-radius: 2px;
   line-height: 28px;
   margin-top: 20px;
   outline: none;
@@ -223,13 +226,14 @@ body {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   background-color: #fff;
-  box-shadow: 0 1px 3px #e0e0e0; }
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); }
   .header .logo {
     float: left; }
   .header .nav-list {
-    float: right; }
+    float: right;
+    margin-right: 20px; }
     .header .nav-list li {
-      width: 90px;
+      width: 70px;
       text-align: center;
       cursor: pointer;
       float: left;
