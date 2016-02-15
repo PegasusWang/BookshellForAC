@@ -1,6 +1,6 @@
 require("index/index.scss");
 
-# avalon
+# booklist
 window.render_book_list = (data) ->
     vm_book_list = avalon.define({
         $id: "book_list"
@@ -58,12 +58,10 @@ window.render_book_list = (data) ->
                     success: (data) ->
                         window.loading(100, 400)
                         vm_book_list.search_data = data.data_books
-                        console.log data.data_books
 
                         if($(".noresult"))
                             $(".noresult").remove()
 
-                        console.log(data.data_books.length)
                         if data.data_books.length == 0
                             $(".search-results").after("<p class='noresult'>╮(╯_╰)╭没搜到啊~，换个词试试</p>")
                 })

@@ -48,41 +48,50 @@
 
 	__webpack_require__(13);
 
-	$(document).ready(function() {
-	  var activeTag, navBind;
-	  navBind = function(nav_class) {
-	    var $nav;
-	    $nav = $(".nav-list");
-	    $nav.find("li").removeClass("nav-active");
-	    return $nav.find(".nav-" + nav_class).addClass("nav-active");
-	  };
-	  activeTag = window.location.pathname.split('/')[1];
-	  if (!activeTag) {
-	    navBind("index");
-	  } else {
-	    navBind(activeTag);
-	  }
-	  return window.loading = function(progress, speed) {
-	    var $loadingbar, currentWidth;
-	    $loadingbar = $(".loading-bar");
-	    currentWidth = $loadingbar.css("width");
-	    if (currentWidth === $loadingbar.parent().css("width")) {
-	      currentWidth = 0;
-	    }
-	    if (progress !== 100 && currentWidth === 0) {
-	      $loadingbar.css({
-	        width: 0
-	      }).stop(true, true).show().animate({
-	        width: progress + "%"
-	      }, speed, null);
+	window.render_nav = function(data) {
+	  var vm_nav;
+	  vm_nav = avalon.define({
+	    $id: "nav",
+	    nav_search: false,
+	    user: data
+	  });
+	  return avalon.ready(function() {
+	    var activeTag, navBind;
+	    navBind = function(nav_class) {
+	      var $nav;
+	      $nav = $(".nav-list");
+	      $nav.find("li").removeClass("nav-active");
+	      return $nav.find(".nav-" + nav_class).addClass("nav-active");
+	    };
+	    activeTag = window.location.pathname.split('/')[1];
+	    if (!activeTag) {
+	      navBind("index");
+	      vm_nav.nav_search = true;
 	    } else {
-	      $loadingbar.animate({
-	        width: progress + "%"
-	      }, speed, null).fadeOut(400);
+	      navBind(activeTag);
 	    }
-	    return true;
-	  };
-	});
+	    return window.loading = function(progress, speed) {
+	      var $loadingbar, currentWidth;
+	      $loadingbar = $(".loading-bar");
+	      currentWidth = $loadingbar.css("width");
+	      if (currentWidth === $loadingbar.parent().css("width")) {
+	        currentWidth = 0;
+	      }
+	      if (progress !== 100 && currentWidth === 0) {
+	        $loadingbar.css({
+	          width: 0
+	        }).stop(true, true).show().animate({
+	          width: progress + "%"
+	        }, speed, null);
+	      } else {
+	        $loadingbar.animate({
+	          width: progress + "%"
+	        }, speed, null).fadeOut(400);
+	      }
+	      return true;
+	    };
+	  });
+	};
 
 
 /***/ },

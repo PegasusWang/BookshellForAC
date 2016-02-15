@@ -20,17 +20,19 @@ html
             header.header.clearfix
                 .container
                     span.logo Mini Library For AC
-                    ul.nav-list(ms-if)
-                        li.nav-search-input.nav-auto.nav-disabled
+                    ul.nav-list(ms-controller="nav")
+                        li.nav-search-input.nav-auto.nav-disabled(ms-if="nav_search")
                             input(type="text" placeholder="随便输入什么进行搜索..")
-                        li.nav-search.nav-auto.nav-disabled
+                        li.nav-search.nav-auto.nav-disabled(ms-if="nav_search")
                             i.fa.fa-search
                         li.nav-index
                             a(href="/") 书架
                         li.nav-about
                             a(href="/about") 关于
-                        li.nav-login
+                        li.nav-login(ms-if="!user")
                             a(href="/login") 登录
+                        li.nav-user(ms-if="user")
+                            span {{user}}
                         
 
         block content
@@ -43,5 +45,7 @@ html
 
          
         script(src='/static/common/common.entry.js')
+        script.
+            window.render_nav(!{user})
         block scripts
             // page scripts

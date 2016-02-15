@@ -1,35 +1,44 @@
 require('lib/font-awesome/css/font-awesome.min.css');
 require('common/common.scss');
 
-$(document).ready ->
-    # 根据pathname更改当前tag
-    navBind = (nav_class) ->
-        $nav = $(".nav-list")
-        $nav.find("li").removeClass("nav-active")
-        $nav.find(".nav-" + nav_class).addClass("nav-active")
+# nav
+window.render_nav = (data) ->
+    vm_nav = avalon.define({
+      $id: "nav"
+      nav_search: false
+      user: data
+    })
 
-    activeTag = window.location.pathname.split('/')[1]
+    avalon.ready ->
+        # 根据pathname更改当前tag
+        navBind = (nav_class) ->
+            $nav = $(".nav-list")
+            $nav.find("li").removeClass("nav-active")
+            $nav.find(".nav-" + nav_class).addClass("nav-active")
 
-    if not activeTag
-        navBind("index")
-    else
-        navBind(activeTag)
+        activeTag = window.location.pathname.split('/')[1]
 
-    # 全局loading方法
-    window.loading = (progress, speed)->
-        $loadingbar = $(".loading-bar")
-        currentWidth = $loadingbar.css("width")
-    
-        # 如果已经执行完毕那么重置进度
-        if currentWidth is $loadingbar.parent().css("width")
-          currentWidth = 0
-        # 如果当前progress不是100% 则不隐藏
-        if progress isnt 100 && currentWidth is 0
-          $loadingbar.css({width: 0})
-                   .stop(true, true)
-                   .show()
-                   .animate({width: progress + "%"}, speed, null)
+        if not activeTag
+            navBind("index")
+            vm_nav.nav_search = true
         else
-          $loadingbar.animate({width: progress + "%"}, speed, null)
-                   .fadeOut(400)
-        true
+            navBind(activeTag)
+
+        # 全局loading方法
+        window.loading = (progress, speed)->
+            $loadingbar = $(".loading-bar")
+            currentWidth = $loadingbar.css("width")
+        
+            # 如果已经执行完毕那么重置进度
+            if currentWidth is $loadingbar.parent().css("width")
+              currentWidth = 0
+            # 如果当前progress不是100% 则不隐藏
+            if progress isnt 100 && currentWidth is 0
+              $loadingbar.css({width: 0})
+                       .stop(true, true)
+                       .show()
+                       .animate({width: progress + "%"}, speed, null)
+            else
+              $loadingbar.animate({width: progress + "%"}, speed, null)
+                       .fadeOut(400)
+            true

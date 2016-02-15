@@ -1,13 +1,10 @@
 var mongoose = require('mongoose');
 
-// 连接数据库
-var db = mongoose.connect('mongodb://localhost/ac');
-
 // 创建模型
 var Schema = mongoose.Schema;
 
 // 书籍模型
-var bookSchema = new Schema({
+var Book = new Schema({
     title: String,      // 标题
     author: String,     // 作者
     intro: String,      // 简介
@@ -20,4 +17,4 @@ var bookSchema = new Schema({
     locate: []          // 定位
 });
 
-exports.Book = db.model('books', bookSchema);
+module.exports = mongoose.model('books', Book);

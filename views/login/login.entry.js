@@ -47,6 +47,52 @@
 
 	__webpack_require__(18);
 
+	$(document).ready(function() {
+	  return $(".aclib-form").submit(function(e) {
+	    var $password, $self, $username, form_data, validation;
+	    e.preventDefault();
+	    $self = $(this);
+	    validation = true;
+	    $username = $self.find("input[name='username']");
+	    $password = $self.find("input[name='password']");
+	    if (!$.trim($password.val())) {
+	      $password.focus().next().show();
+	      validation = false;
+	      false;
+	    } else {
+	      $password.next().hide();
+	    }
+	    if (!$.trim($username.val())) {
+	      $username.focus().next().show();
+	      validation = false;
+	      false;
+	    } else {
+	      $username.next().hide();
+	    }
+	    console.log(validation);
+	    if (validation) {
+	      form_data = $self.serialize();
+	      return $.ajax({
+	        url: '/loginpost',
+	        type: 'POST',
+	        data: form_data,
+	        dataType: 'json',
+	        success: function(data) {
+	          if (data.status === 'admin') {
+	            return window.location.href = "/admin?user=" + data.user;
+	          } else if (data.status === 'user') {
+	            return window.location.href = "?user=" + data.user;
+	          }
+	        },
+	        error: function() {
+	          $password.focus().next().show();
+	          return $username.focus().next().show();
+	        }
+	      });
+	    }
+	  });
+	});
+
 
 /***/ },
 

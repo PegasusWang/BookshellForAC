@@ -19,11 +19,12 @@
     }
 
     .login-form {
-        width: 300px;
+        width: 323px;
+        padding-left: 23px; 
         margin: 0 auto 30px auto;
 
         input[type="submit"] {
-            width: 100%;
+            width: 300px;
             height: 35px;
         }
     }

@@ -4,7 +4,7 @@ block styles
   link(type='text/css', rel='stylesheet', href='/static/index/index.entry.css')
 
 block content
-    section.container.pdt-60(ms-controller="book_list")
+    section.container.pdt-60.ms-controller(ms-controller="book_list")
         table.book-list(ms-if="!searching")
             tr.book(ms-repeat="data")
                 td 

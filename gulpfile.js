@@ -64,7 +64,10 @@ gulp.task('webpack', function () {
         },
         plugins: [
             new ExtractTextPlugin('[name].css')
-        ]
+        ],
+        stats: {
+            children: false  
+        }
     // gulp 输出路径
     }).pipe(gulp.dest('./views'));
 });

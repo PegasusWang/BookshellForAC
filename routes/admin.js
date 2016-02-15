@@ -1,39 +1,17 @@
-var mongoose = require('mongoose');
+var express = require('express');
+var Book = require('../models/book');
 var multiparty = require("multiparty");
 var util = require("util");
 var xlsx = require('node-xlsx');
-var db = require('../models/db');
-var Book = db.Book;
+var router = express.Router();
 
-// '/' 首页
-exports.index = function (req, res) {
-    Book.find().skip(0).limit(30).exec(function(err, books) {
-        if (err) throw err;
-        res.render('index/index', {data_books: JSON.stringify(books)});
-    });
-};
-
-// '/loadmore' 滚动加载
-exports.loadMore = function (req, res) {
-    var skip = 0;
-
-    if(req.body.skip) {
-        skip = parseInt(req.body.skip);
-    }
-
-    Book.find().skip(skip).limit(30).exec(function(err, books) {
-        if (err) throw err;
-        res.json( {data_books: books} );
-    });
-}
-
-// '/admin' 管理
-exports.admin = function (req, res) {
+// 管理
+router.get('/', function (req, res) {
     res.render('admin/book', {});
-};
+});
 
-// '/admin/addbook' 添加图书
-exports.addBook = function (req, res) {
+// 添加图书
+router.post('/addbook', function (req, res) {
     // 生成数据obj
     var book = new Book({
         'title': req.body.title,
@@ -51,10 +29,9 @@ exports.addBook = function (req, res) {
         if (err) throw err;
         res.json( {"status": "ok"} );
     });
-};
+});
 
-// '/admin/excelimport' 通过excel导入
-exports.importFromExcel = function (req, res) {
+router.post('/excelimport', function (req, res) {
     var form = new multiparty.Form({ 'uploadDir': __dirname + '/../uploads' });
  
     // 返回录入结果
@@ -95,35 +72,6 @@ exports.importFromExcel = function (req, res) {
             res.end(util.inspect({fields: fields, files: files}));
         });
     });
-};
+});
 
-// '/search' 搜索
-exports.search = function (req, res) {
-    var query = req.body.q;
-    var querySet = [];
-    var queryRegExp = new RegExp(".*?" + query + ".*?");
-    var feilds = ['title', 'author', 'intro', 'category', 'press'];
-
-    for (var i = 0; i < feilds.length; i++) {
-        var s = {};
-        s[feilds[i]] = queryRegExp;
-        querySet.push(s);
-    }
-
-    querySet = {'$or': querySet};
-
-    Book.find(querySet, function(err, books) {
-        if (err) throw err;
-        res.json( {data_books: books} );
-    });
-}
-
-// '/about' 关于
-exports.about = function (req, res) {
-    res.render('about/about', {});
-};
-
-// '/login' 登录
-exports.login = function (req, res) {
-    res.render('login/login', {});
-}
+module.exports = router;
