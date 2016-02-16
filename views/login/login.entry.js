@@ -69,11 +69,10 @@
 	    } else {
 	      $username.next().hide();
 	    }
-	    console.log(validation);
 	    if (validation) {
 	      form_data = $self.serialize();
 	      return $.ajax({
-	        url: '/loginpost',
+	        url: '/login',
 	        type: 'POST',
 	        data: form_data,
 	        dataType: 'json',
@@ -81,7 +80,7 @@
 	          if (data.status === 'admin') {
 	            return window.location.href = "/admin?user=" + data.user;
 	          } else if (data.status === 'user') {
-	            return window.location.href = "?user=" + data.user;
+	            return window.location.href = "/?user=" + data.user;
 	          }
 	        },
 	        error: function() {

@@ -1,10 +1,10 @@
-var gulp         = require('gulp');
-var glob         = require("glob");
-var path         = require("path");
-var webpack      = require('webpack-stream');
+var gulp = require('gulp');
+var glob = require("glob");
+var path = require("path");
+var webpack = require('webpack-stream');
 var autoprefixer = require('autoprefixer');
-var precss       = require('precss');
-var nodemon      = require('gulp-nodemon');
+var precss = require('precss');
+var nodemon = require('gulp-nodemon');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 var appRoot = __dirname;

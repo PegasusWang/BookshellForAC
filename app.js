@@ -1,12 +1,12 @@
-var express         = require('express');
-var bodyParser      = require('body-parser');
-var cookieParser    = require('cookie-parser');
-var session         = require('express-session');
-var favicon         = require('serve-favicon');
-var mongoose        = require('mongoose');
-var crypto          = require('crypto');
-var route           = require('./routes/index');
-var admin_route     = require('./routes/admin');
+var express = require('express');
+var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
+var favicon = require('serve-favicon');
+var mongoose = require('mongoose');
+var MongoStore = require('connect-mongo')(session);
+var route = require('./routes/index');
+var admin_route = require('./routes/admin');
 
 // 创建express实例
 var app = express();
@@ -32,7 +32,12 @@ app.use(bodyParser.json());
 
 // 开启cookie和session
 app.use(cookieParser());
-app.use(session({secret: 'minilib.for.ac'}));
+app.use(session({
+    secret: "minilib.for.ac", 
+    maxAge: new Date(Date.now() + 3600000), //1 Hour
+    expires: new Date(Date.now() + 3600000), //1 Hour
+    store: new MongoStore({ mongooseConnection: mongoose.connection })
+}));
 
 // 路由
 app.use('/', route);

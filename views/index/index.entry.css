@@ -23,7 +23,10 @@
     .book-list .book td:last-child,
     .search-results .book td:last-child {
       text-align: right;
-      padding-right: 21px; }
+      padding-right: 21px;
+      -webkit-transition: all ease-in-out .2s;
+      -moz-transition: all ease-in-out .2s;
+      transition: all ease-in-out .2s; }
       .book-list .book td:last-child:before,
       .search-results .book td:last-child:before {
         position: absolute;
@@ -51,9 +54,60 @@
     .book-list .book:hover,
     .search-results .book:hover {
       background-color: #F5F5F5; }
-      .book-list .book:hover td:last-child:before,
-      .search-results .book:hover td:last-child:before {
-        opacity: 1; }
+      .book-list .book:hover td:last-child,
+      .search-results .book:hover td:last-child {
+        padding-right: 90px; }
+        .book-list .book:hover td:last-child:before,
+        .search-results .book:hover td:last-child:before {
+          opacity: 1; }
+
+.book-panel {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 30px 0;
+  z-index: 11;
+  color: #fff;
+  background-image: url(http://7lrzg1.com1.z0.glb.clouddn.com/cube_bg_light.png);
+  background-color: #FF5722;
+  background-position-y: -2px;
+  display: none;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); }
+  .book-panel .book-detail {
+    float: left; }
+  .book-panel .btn-group {
+    float: right;
+    margin-top: 6px;
+    margin-right: 40px; }
+    .book-panel .btn-group .btn {
+      margin: 0 5px;
+      padding: 7px 21px;
+      font-size: 14px;
+      text-decoration: none;
+      cursor: pointer;
+      vertical-align: text-top;
+      background-color: #fff;
+      color: #FF5722;
+      border-radius: 2px; }
+  .book-panel .book-cancel {
+    position: absolute;
+    right: 50%;
+    bottom: 3px;
+    cursor: pointer;
+    text-align: center; }
+    .book-panel .book-cancel .fa {
+      position: relative;
+      top: 0;
+      font-size: 20px;
+      -webkit-transition: all ease-in-out .2s;
+      -moz-transition: all ease-in-out .2s;
+      transition: all ease-in-out .2s;
+      color: rgba(255, 255, 255, 0.5); }
+    .book-panel .book-cancel:hover .fa {
+      top: -2px;
+      color: #fff; }
 
 .nomore,
 .noresult {

@@ -6,7 +6,7 @@ block styles
 block content
     section.container.pdt-60.ms-controller(ms-controller="book_list")
         table.book-list(ms-if="!searching")
-            tr.book(ms-repeat="data")
+            tr.book(ms-repeat="data", ms-click="go(el)")
                 td 
                     h3 {{el.title}}
                         small.tag.tag-green(ms-if="el.category == '产品' || el.category == '设计'") {{el.category}}
@@ -14,8 +14,7 @@ block content
                         small.tag.tag-blue(ms-if="el.category == '管理' || el.category == '运营'") {{el.category}}
                         small.tag.tag-orange(ms-if="el.category == '计算机' || el.category == '文学'") {{el.category}}
                     small {{el.author}}
-                td {{el.press}}
-                td(ms-class="unavailable: el.count<1") {{el.count}}
+                td(ms-class="unavailable: el.count<1") {{el.press}}
 
         table.search-results(ms-if="searching")
             tr.book(ms-repeat="search_data")
@@ -26,8 +25,18 @@ block content
                         small.tag.tag-blue(ms-if="el.category == '管理' || el.category == '运营'") {{el.category}}
                         small.tag.tag-orange(ms-if="el.category == '计算机' || el.category == '文学'") {{el.category}}
                     small {{el.author}}
-                td {{el.press}}
-                td(ms-class="unavailable: el.count<1") {{el.count}}
+                td(ms-class="unavailable: el.count<1") {{el.press}}
+
+    section.book-panel.ms-controller(ms-controller="book", ms-if="data")
+        .container
+            div.book-detail
+                h1 {{data.title}}
+                p {{data.press}} - {{data.author}}
+            div.btn-group
+                a.btn 借阅
+                a.btn 归还
+        span.book-cancel(ms-click="go(data)") 
+            i.fa.fa-angle-double-up
     
 block scripts
     script(src='/static/index/index.entry.js')

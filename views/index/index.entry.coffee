@@ -2,11 +2,30 @@ require("index/index.scss");
 
 # booklist
 window.render_book_list = (data) ->
+    $book_panel = $(".book-panel")
+
+    vm_book = avalon.define({
+        $id: "book"
+        data: undefined
+        go: (item) ->
+            if vm_book.data and item.$model._id == vm_book.data.$model._id
+                $book_panel.fadeToggle(300)
+            else
+                vm_book.data = item
+                $book_panel.fadeIn(300)
+    })
+
     vm_book_list = avalon.define({
         $id: "book_list"
         data: data
         search_data: []
         searching: false
+        go: (item) ->
+            if vm_book.data and item.$model._id == vm_book.data.$model._id
+                $book_panel.fadeToggle(100)
+            else
+                vm_book.data = item
+                $book_panel.fadeIn(100)
     })
 
     avalon.ready ->
@@ -29,8 +48,6 @@ window.render_book_list = (data) ->
                     success: (data) ->
                         window.loading(100, 400)
                         vm_book_list.data.pushArray(data.data_books)
-                        
-                        
 
                         if data.data_books.length == 30
                             $(document).scroll scrollLoad

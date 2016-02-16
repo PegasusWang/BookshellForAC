@@ -67,8 +67,10 @@
 	    if (!activeTag) {
 	      navBind("index");
 	      vm_nav.nav_search = true;
-	    } else {
+	    } else if (activeTag === "about") {
 	      navBind(activeTag);
+	    } else {
+	      navBind("merge");
 	    }
 	    return window.loading = function(progress, speed) {
 	      var $loadingbar, currentWidth;

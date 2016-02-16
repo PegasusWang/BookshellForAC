@@ -25,6 +25,7 @@
         & td:last-child {
             text-align: right;
             padding-right: 21px;
+            transition: all ease-in-out .2s;
 
             &:before {
                 position: absolute;
@@ -55,6 +56,8 @@
             background-color: $light_grey;
             
             td:last-child {
+                padding-right: 90px;
+
                 &:before {
                     opacity: 1;
                 }
@@ -63,6 +66,65 @@
     }
 }
 
+.book-panel {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 30px 0;
+    z-index: 11;
+    color: #fff;
+    background-image: url(http://7lrzg1.com1.z0.glb.clouddn.com/cube_bg_light.png);
+    background-color: $ac_red;
+    background-position-y: -2px;
+    display: none;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+
+    .book-detail {
+        float: left;
+    }
+
+    .btn-group {
+        float: right;
+        margin-top: 6px;
+        margin-right: 40px;
+
+        .btn {
+            margin: 0 5px;
+            padding: 7px 21px;
+            font-size: 14px;
+            text-decoration: none;
+            cursor: pointer;
+            vertical-align: text-top;
+            background-color: #fff;
+            color: $ac_red;
+            border-radius: 2px;
+        }
+    }
+
+    .book-cancel {
+        position: absolute;
+        right: 50%;
+        bottom: 3px;
+        cursor: pointer;
+        text-align: center;
+        
+        .fa {
+            position: relative;
+            top: 0;
+            font-size: 20px;
+            transition: all ease-in-out .2s;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        &:hover {
+            .fa {
+                top: -2px;
+                color: #fff;
+            }
+        }
+    }
+}
 
 .nomore,
 .noresult {

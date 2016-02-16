@@ -48,12 +48,33 @@
 	__webpack_require__(16);
 
 	window.render_book_list = function(data) {
-	  var vm_book_list;
+	  var $book_panel, vm_book, vm_book_list;
+	  $book_panel = $(".book-panel");
+	  vm_book = avalon.define({
+	    $id: "book",
+	    data: void 0,
+	    go: function(item) {
+	      if (vm_book.data && item.$model._id === vm_book.data.$model._id) {
+	        return $book_panel.fadeToggle(300);
+	      } else {
+	        vm_book.data = item;
+	        return $book_panel.fadeIn(300);
+	      }
+	    }
+	  });
 	  vm_book_list = avalon.define({
 	    $id: "book_list",
 	    data: data,
 	    search_data: [],
-	    searching: false
+	    searching: false,
+	    go: function(item) {
+	      if (vm_book.data && item.$model._id === vm_book.data.$model._id) {
+	        return $book_panel.fadeToggle(100);
+	      } else {
+	        vm_book.data = item;
+	        return $book_panel.fadeIn(100);
+	      }
+	    }
 	  });
 	  avalon.ready(function() {
 	    var scrollLoad;

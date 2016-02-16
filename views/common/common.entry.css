@@ -177,30 +177,25 @@ body {
   margin: 0 10px;
   padding: 1px 2px 2px 2px;
   border: 1px solid;
-  border-radius: 3px;
   color: #AAA;
   font-size: 12px;
   font-weight: normal; }
 
 .tag-red {
   color: #FF5722;
-  border-color: #ffa588; }
+  border-color: #ffcbbb; }
 
 .tag-green {
-  color: #8BC34A;
-  border-color: #bcdc97; }
-
-.tag-deep-green {
-  color: #009688;
-  border-color: #00fce4; }
+  color: #539B00;
+  border-color: #d5e9bd; }
 
 .tag-blue {
   color: #2196F3;
-  border-color: #82c4f8; }
+  border-color: #b2dbfb; }
 
 .tag-orange {
   color: #FF9800;
-  border-color: #ffc166; }
+  border-color: #ffd699; }
 
 /* 隐藏 */
 .hidden {
@@ -229,9 +224,32 @@ body {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); }
   .header .logo {
     float: left; }
+  .header .beta {
+    position: relative;
+    top: -2px;
+    left: 5px;
+    font-size: 12px;
+    color: #fff;
+    background: #FF5722;
+    padding: 1px 2px 2px 2px; }
+    .header .beta:before {
+      content: " ";
+      width: 0;
+      height: 0;
+      border: 3px solid transparent;
+      border-left-color: #D43F10;
+      position: absolute;
+      left: 0px;
+      top: 15px;
+      -webkit-transform: rotate(90deg);
+      -moz-transform: rotate(90deg);
+      -ms-transform: rotate(90deg);
+      transform: rotate(90deg); }
   .header .nav-list {
     float: right;
-    margin-right: 20px; }
+    margin-right: 20px;
+    overflow: hidden;
+    height: 61px; }
     .header .nav-list li {
       width: 70px;
       text-align: center;
@@ -260,6 +278,19 @@ body {
         width: auto;
         padding-left: 15px;
         padding-right: 15px; }
+      .header .nav-list li a.nav-logout {
+        background-color: #FF5722;
+        color: #fff;
+        margin-top: 1px; }
+        .header .nav-list li a.nav-logout .fa {
+          color: #fff; }
+      .header .nav-list li.nav-user {
+        top: 0;
+        -webkit-transition: all ease-out .25s;
+        -moz-transition: all ease-out .25s;
+        transition: all ease-out .25s; }
+      .header .nav-list li.nav-user:hover {
+        top: -61px; }
     .header .nav-list li.nav-search-input input {
       height: 33px;
       width: 150px;

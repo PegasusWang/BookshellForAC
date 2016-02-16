@@ -1,5 +1,6 @@
 var express = require('express');
 var Book = require('../models/book');
+var User = require('../models/user');
 var multiparty = require("multiparty");
 var util = require("util");
 var xlsx = require('node-xlsx');
@@ -7,7 +8,7 @@ var router = express.Router();
 
 // 管理
 router.get('/', function (req, res) {
-    res.render('admin/book', {});
+    res.render('admin/book');
 });
 
 // 添加图书
@@ -25,12 +26,15 @@ router.post('/addbook', function (req, res) {
         'barcode': req.body.barcode,
         'locate': []
     });
+
+    // 存储数据，返回存储状态
     book.save(function (err) {
         if (err) throw err;
         res.json( {"status": "ok"} );
     });
 });
 
+// excel导入
 router.post('/excelimport', function (req, res) {
     var form = new multiparty.Form({ 'uploadDir': __dirname + '/../uploads' });
  

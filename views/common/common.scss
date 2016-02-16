@@ -136,7 +136,6 @@ body {
   margin: 0 10px;
   padding: 1px 2px 2px 2px;
   border: 1px solid;
-  border-radius: 3px;
   color: $grey;
   font-size: 12px;
   font-weight: normal;
@@ -144,27 +143,22 @@ body {
 
 .tag-red {
   color: $ac_red;
-  border-color: lighten($ac_red, 20%);
+  border-color: lighten($ac_red, 30%);
 }
 
 .tag-green {
-  color: $light_green;
-  border-color: lighten($light_green, 20%);
-}
-
-.tag-deep-green {
   color: $deep_green;
-  border-color: lighten($deep_green, 20%);
+  border-color: lighten($light_green, 30%);
 }
 
 .tag-blue {
   color: $blue;
-  border-color: lighten($blue, 20%);
+  border-color: lighten($blue, 30%);
 }
 
 .tag-orange {
   color: $orange;
-  border-color: lighten($orange, 20%);
+  border-color: lighten($orange, 30%);
 }
 
 /* 隐藏 */
@@ -198,9 +192,34 @@ body {
     float: left;
   }
 
+  .beta {
+    position: relative;
+    top: -2px;
+    left: 5px;
+    font-size: 12px;
+    color: #fff;
+    background: #FF5722;
+    padding: 1px 2px 2px 2px;
+
+    &:before {
+      content: " ";
+      width: 0;
+      height: 0;
+      border: 3px solid transparent;
+      border-left-color: #D43F10;
+      position: absolute;
+      left: 0px;
+      top: 15px;
+      transform: rotate(90deg);
+    }
+  }
+
   .nav-list {
     float: right;
     margin-right: 20px;
+    overflow: hidden;
+    height: 61px;
+
     li {
       width: 70px;
       text-align: center;
@@ -217,24 +236,48 @@ body {
         height: 100%;
         display: inline-block;
       }
+
       &:last-child {
         border-right: none;
       }
+
       &.nav-active {
         border-bottom: 1px solid $ac_red;
       }
+
       &:hover {
         background-color: $light_grey;
       }
+
       &.nav-disabled {
         color: $grey;
         cursor: default;
         background-color: $light_grey;
       }
+
       &.nav-auto {
         width: auto;
         padding-left: 15px;
         padding-right: 15px;
+      }
+
+      a.nav-logout {
+        background-color: $ac_red;
+        color: #fff;
+        margin-top: 1px;
+
+        .fa {
+          color: #fff;
+        }
+      }
+
+      &.nav-user {
+        top: 0;
+        transition: all ease-out .25s;
+      }
+
+      &.nav-user:hover {
+        top: -61px;
       }
     }
     li.nav-search-input {

@@ -21,8 +21,10 @@ window.render_nav = (data) ->
         if not activeTag
             navBind("index")
             vm_nav.nav_search = true
-        else
+        else if activeTag is "about"
             navBind(activeTag)
+        else
+            navBind("merge")
 
         # 全局loading方法
         window.loading = (progress, speed)->

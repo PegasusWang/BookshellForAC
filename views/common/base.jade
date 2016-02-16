@@ -20,6 +20,7 @@ html
             header.header.clearfix
                 .container
                     span.logo Mini Library For AC
+                    span.beta Beta
                     ul.nav-list(ms-controller="nav")
                         li.nav-search-input.nav-auto.nav-disabled(ms-if="nav_search")
                             input(type="text" placeholder="随便输入什么进行搜索..")
@@ -29,10 +30,12 @@ html
                             a(href="/") 书架
                         li.nav-about
                             a(href="/about") 关于
-                        li.nav-login(ms-if="!user")
+                        li.nav-merge.nav-login(ms-if="!user")
                             a(href="/login") 登录
-                        li.nav-user(ms-if="user")
+                        li.nav-merge.nav-user(ms-if="user")
                             span {{user}}
+                            a.nav-logout(href="/logout") 退出 
+                                i.fa.fa-times-circle
                         
 
         block content
@@ -46,6 +49,6 @@ html
          
         script(src='/static/common/common.entry.js')
         script.
-            window.render_nav(!{user})
+            window.render_nav("!{user}")
         block scripts
             // page scripts
