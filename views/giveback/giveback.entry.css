@@ -1,0 +1,16 @@
+.log-list td {
+  cursor: pointer;
+  padding: 4px 16px; }
+
+.log-list .log-date {
+  color: #AAA; }
+
+.log-list .log-giveback {
+  color: #FF5722;
+  opacity: 0;
+  -webkit-transition: all ease-in-out .2s;
+  -moz-transition: all ease-in-out .2s;
+  transition: all ease-in-out .2s; }
+
+.log-list tr:hover .log-giveback {
+  opacity: 1; }

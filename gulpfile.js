@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var glob = require("glob");
 var path = require("path");
+var os = require("os");
 var webpack = require('webpack-stream');
 var autoprefixer = require('autoprefixer');
 var precss = require('precss');
@@ -25,6 +26,8 @@ gulp.task('webpack', function () {
         entries[key] = path.join(__dirname, filePath);
     }
 
+    console.log(os.hostname());
+
     return webpack({
         // 开发环境下监视文件改动，实时重新打包
         watch: true,
@@ -33,7 +36,7 @@ gulp.task('webpack', function () {
         // 输出配置
         output: {
             filename: '[name].js',
-            publicPath: 'static/'
+            publicPath: 'http://127.0.0.1:8080/static/'
         },
         // 模块配置
         module: {

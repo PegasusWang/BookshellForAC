@@ -1,5 +1,13 @@
 require("admin/book.scss");
 
+# 控制切换
+vm_layer = avalon.define({
+    $id: "layer"
+    current: 'book'
+    change: (target)->
+        vm_layer.current = target
+})
+
 # 添加图书
 # 主要完成2个工作:
 #   1.单本添加工作 √

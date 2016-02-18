@@ -17,7 +17,7 @@ block content
                 td(ms-class="unavailable: el.count<1") {{el.press}}
 
         table.search-results(ms-if="searching")
-            tr.book(ms-repeat="search_data")
+            tr.book(ms-repeat="search_data", ms-click="go(el)")
                 td 
                     h3 {{el.title}}
                         small.tag.tag-green(ms-if="el.category == '产品' || el.category == '设计'") {{el.category}}
@@ -33,9 +33,9 @@ block content
                 h1 {{data.title}}
                 p {{data.press}} - {{data.author}}
             div.btn-group
-                a.btn 借阅
-                a.btn 归还
-        span.book-cancel(ms-click="go(data)") 
+                a.btn(ms-if="action == 'borrow'" ms-click="borrow") 借阅
+                a.btn(ms-if="action == 'giveback'" ms-click="giveback") 还书
+        span.book-cancel(ms-click="hide") 
             i.fa.fa-angle-double-up
     
 block scripts

@@ -7,6 +7,8 @@ var mongoose = require('mongoose');
 var MongoStore = require('connect-mongo')(session);
 var route = require('./routes/index');
 var admin_route = require('./routes/admin');
+var auth_route = require('./routes/auth');
+var book_route = require('./routes/book');
 
 // 创建express实例
 var app = express();
@@ -42,6 +44,8 @@ app.use(session({
 // 路由
 app.use('/', route);
 app.use('/admin', admin_route);
+app.use('/auth', auth_route);
+app.use('/book', book_route);
 
 // 启动服务并从指定端口监听连接请求
 app.listen('8080', function () {

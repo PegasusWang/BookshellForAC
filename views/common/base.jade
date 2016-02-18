@@ -2,8 +2,7 @@ doctype html
 html
     head
         meta(charset='utf-8')     
-        meta(http-equiv='X-UA-Compatible', content='IE=Edge')    
-        meta(content='user-scalable=0', name='viewport')  
+        meta(http-equiv='X-UA-Compatible', content='IE=Edge') 
         script(src='/static/lib/jquery.min.js')
         script(src='/static/lib/avalon.shim.min.js')
         link(type='text/css', rel='stylesheet', href='/static/common/common.entry.css')
@@ -28,13 +27,19 @@ html
                             i.fa.fa-search
                         li.nav-index
                             a(href="/") 书架
+                        li.nav-giveback(ms-if="user")
+                            a(href="/giveback") 还书
+                        li.nav-buy(ms-if="user")
+                            a(href="/buy") 求购
                         li.nav-about
                             a(href="/about") 关于
+                        li.nav-admin(ms-if="isadmin")
+                            a(href="/admin") 管理
                         li.nav-merge.nav-login(ms-if="!user")
-                            a(href="/login") 登录
+                            a(href="/auth/login") 登录
                         li.nav-merge.nav-user(ms-if="user")
                             span {{user}}
-                            a.nav-logout(href="/logout") 退出 
+                            a.nav-logout(href="/auth/logout") 退出 
                                 i.fa.fa-times-circle
                         
 
@@ -44,11 +49,11 @@ html
         block footer
             // footer 
             footer.footer
-                small Mini Library For AC@2015-2016 By Edward v0.2.0
+                small Mini Library For AC@2016 By Edward v16.2.18
 
          
         script(src='/static/common/common.entry.js')
         script.
-            window.render_nav("!{user}")
+            window.render_nav({ user: "!{user}", isadmin: "!{isadmin}", uid: "!{uid}"})
         block scripts
             // page scripts

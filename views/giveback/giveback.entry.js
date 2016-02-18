@@ -45,60 +45,20 @@
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(31);
+	__webpack_require__(27);
 
-	$(document).ready(function() {
-	  return $(".aclib-form").submit(function(e) {
-	    var $password, $self, $username, form_data, validation;
-	    e.preventDefault();
-	    $self = $(this);
-	    validation = true;
-	    $username = $self.find("input[name='username']");
-	    $password = $self.find("input[name='password']");
-	    if (!$.trim($password.val())) {
-	      $password.focus().next().show();
-	      validation = false;
-	      false;
-	    } else {
-	      $password.next().hide();
-	    }
-	    if (!$.trim($username.val())) {
-	      $username.focus().next().show();
-	      validation = false;
-	      false;
-	    } else {
-	      $username.next().hide();
-	    }
-	    if (validation) {
-	      form_data = {
-	        username: $username.val(),
-	        password: hex_md5($password.val())
-	      };
-	      return $.ajax({
-	        url: '/auth/login',
-	        type: 'POST',
-	        data: form_data,
-	        dataType: 'json',
-	        success: function(data) {
-	          if (data.status === 'admin') {
-	            return window.location.href = "/admin";
-	          } else {
-	            return window.location.href = "/";
-	          }
-	        },
-	        error: function() {
-	          $username.focus().next().show();
-	          return $password.val("").focus().next().show();
-	        }
-	      });
-	    }
+	window.render_log_list = function(data) {
+	  var vm_log_list;
+	  return vm_log_list = avalon.define({
+	    $id: "log_list",
+	    data: data
 	  });
-	});
+	};
 
 
 /***/ },
 
-/***/ 31:
+/***/ 27:
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin

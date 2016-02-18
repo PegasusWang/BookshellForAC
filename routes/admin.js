@@ -4,11 +4,18 @@ var User = require('../models/user');
 var multiparty = require("multiparty");
 var util = require("util");
 var xlsx = require('node-xlsx');
+var auth = require('../midwares/auth');
 var router = express.Router();
+
+// 验证是否登录
+router.use(auth.isLogin);
+
+// 验证是否是管理员
+router.use(auth.isAdmin);
 
 // 管理
 router.get('/', function (req, res) {
-    res.render('admin/book');
+    res.render('admin/book', {user: req.session.user, isadmin: req.session.isadmin});
 });
 
 // 添加图书

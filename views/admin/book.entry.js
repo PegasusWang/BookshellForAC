@@ -34,7 +34,7 @@
 /******/ 	__webpack_require__.c = installedModules;
 
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "static/";
+/******/ 	__webpack_require__.p = "http://127.0.0.1:8080/static/";
 
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(0);
@@ -44,7 +44,17 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
+	var vm_layer;
+
 	__webpack_require__(1);
+
+	vm_layer = avalon.define({
+	  $id: "layer",
+	  current: 'book',
+	  change: function(target) {
+	    return vm_layer.current = target;
+	  }
+	});
 
 	$(document).ready(function() {
 	  $("#add-submit").click(function() {

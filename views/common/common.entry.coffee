@@ -1,12 +1,17 @@
 require('lib/font-awesome/css/font-awesome.min.css');
 require('common/common.scss');
 
+require('sweetalert/dist/sweetalert.css');
+require('sweetalert');
+
 # nav
 window.render_nav = (data) ->
     vm_nav = avalon.define({
       $id: "nav"
       nav_search: false
-      user: data
+      uid: data.uid
+      user: data.user
+      isadmin: data.isadmin
     })
 
     avalon.ready ->
@@ -21,7 +26,7 @@ window.render_nav = (data) ->
         if not activeTag
             navBind("index")
             vm_nav.nav_search = true
-        else if activeTag is "about"
+        else if activeTag isnt "auth"
             navBind(activeTag)
         else
             navBind("merge")

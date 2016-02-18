@@ -1,6 +1,8 @@
 var express = require('express');
 var Book = require('../models/book');
 var User = require('../models/user');
+var Log = require('../models/log');
+var auth = require('../midwares/auth');
 var router = express.Router();
 
 // 首页
@@ -8,7 +10,12 @@ router.get('/', function (req, res) {
     // 查询图书列表，首次加载30
     Book.find().skip(0).limit(30).exec(function (err, books) {
         if (err) throw err;
-        res.render('index/index', {data_books: JSON.stringify(books)});  
+        res.render('index/index', {
+            data_books: JSON.stringify(books),
+            uid: req.session.uid,
+            user: req.session.user, 
+            isadmin: req.session.isadmin
+        });  
     });
 });
 
@@ -43,39 +50,30 @@ router.post('/search', function (req, res) {
 
     querySet = {'$or': querySet};
 
-    // 查询结果已json格式返回
+    // 查询结果以json格式返回
     Book.find(querySet, function (err, books) {
         if (err) throw err;
         res.json( {data_books: books} );
     });
 });
 
+// 日志
+router.get('/giveback', auth.isLogin, function (req, res) {
+    Log.find({'uid': req.session.uid}).exec(function (err, logs) {
+        if (err) throw err;
+        res.render('giveback/giveback', {user: req.session.user, isadmin: req.session.isadmin, logs: JSON.stringify(logs)});
+    });
+});
+
+// 求购
+router.get('/buy', function (req, res) {
+    res.render('buy/buy', {user: req.session.user, isadmin: req.session.isadmin});
+});
+
 // 关于
 router.get('/about', function (req, res) {
-    res.render('about/about');
+    res.render('about/about', {user: req.session.user, isadmin: req.session.isadmin});
 });
 
-// 注册
-router.get('/register', function(req, res) {
-    res.render('register', { });
-});
-
-router.post('/register', function(req, res, next) {
-   
-});
-
-// 登录
-router.get('/login', function(req, res) {
-    res.render('login/login', {});
-});
-
-router.post('/login', function(req, res, next) {
-    
-});
-
-// 注销
-router.get('/logout', function(req, res, next) {
-    
-});
 
 module.exports = router;

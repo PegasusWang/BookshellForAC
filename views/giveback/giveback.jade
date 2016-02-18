@@ -1,0 +1,25 @@
+extends ../common/base.jade
+
+block styles
+  link(type='text/css', rel='stylesheet', href='/static/giveback/giveback.entry.css')
+
+block content
+    section.container.panel.pdt-90(ms-controller="log_list")
+        // 未还列表
+        h2.panel-title
+            i.fa.fa-history
+            |  未还列表
+        div(ms-if="!data.length")
+            | 您没有未还的书，
+            a(href="/")
+                | 先去找本书看看
+        table.log-list(ms-if="data.length")
+            tr(ms-repeat="data")
+                td《{{el.bname}}》
+                td.log-date {{el.date | date("yyyy-MM-dd")}}
+                td.log-giveback(ms-click="giveback(el)") 立即还书
+
+    block scripts
+    script(src='/static/giveback/giveback.entry.js')
+    script.
+        window.render_log_list(!{logs})

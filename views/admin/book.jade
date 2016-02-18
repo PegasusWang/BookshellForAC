@@ -5,56 +5,93 @@ block styles
 
 block content
   // 添加图书
-  .addbook.container.clearfix.pdt-60
-      // 单本添加
-      .panel
-        h2.panel-title
-          i.fa.fa-plus-square 
-          |  添加图书        
-        form.aclib-form
-          .aclib-form-item
-            input(type='text', name='title', placeholder='书名')      
-            i.aclib-form-tip.fa.fa-exclamation-triangle
-          .aclib-form-item
-            input(type='text', name='author', placeholder='作者')
-            i.aclib-form-tip.fa.fa-exclamation-triangle
-          .aclib-form-item
-            input(type='text', name='press', placeholder='出版社')                        
-            i.aclib-form-tip.fa.fa-exclamation-triangle                    
-          .aclib-form-item
-            input(type='text', name='barcode', placeholder='条形码')                          
-            i.aclib-form-tip.fa.fa-exclamation-triangle                  
-          .aclib-form-item
-            input(type='text', name='intro', placeholder='简介')                       
-            i.aclib-form-tip.fa.fa-exclamation-triangle             
-          .aclib-form-item
-            input(type='text', name='count', placeholder='数量')               
-            i.aclib-form-tip.fa.fa-exclamation-triangle          
-          .aclib-form-item
-            // 分类做成select或者自动补全
-            input(type='text', name='category', placeholder='分类')                
-            i.aclib-form-tip.fa.fa-exclamation-triangle           
-          input#add-submit(type='button', value='添加')         
-          i.fa.fa-spinner
-          i.fa.fa-check-circle.text-success 添加成功
-      // Excel 批量导入
-      .panel
-        h2.panel-title
-          i.fa.fa-external-link-square 
-          |  从Excel导入       
-        br
-        p.text-alert 使用Excel进行导入会覆盖掉之前的数据，请谨慎操作！
-        br
-                 
-        p.text-disabled 点这里下载 
-          a(href='javascript:void(0);') Excel模板
-                 
-        form.aclib-form(method='POST', enctype='multipart/form-data', action='/admin/excelimport')
-          input#excel-import(type='button', onclick='excel.click()', value='批量导入')
-                       
-          input#excel(type='file', name='excel', multiple='multiple')
-                       
-          input.hidden(type='submit')
+  .addbook.container.clearfix.pdt-60(ms-controller="layer")
+      ul.layer-nav.f-l
+        li(ms-class="active: current=='book'", ms-click="change('book')")
+          i.fa.fa-book
+          |   图书管理
+        li(ms-class="active: current=='user'", ms-click="change('user')")
+          i.fa.fa-user
+          |   用户管理
+      .layer.f-l(ms-if="current == 'book'")
+        // 单本添加
+        .panel
+          h2.panel-title 添加图书        
+          form.aclib-form
+            .aclib-form-item
+              input(type='text', name='title', placeholder='书名')      
+              i.aclib-form-tip.fa.fa-exclamation-triangle
+            .aclib-form-item
+              input(type='text', name='author', placeholder='作者')
+              i.aclib-form-tip.fa.fa-exclamation-triangle
+            .aclib-form-item
+              input(type='text', name='press', placeholder='出版社')                        
+              i.aclib-form-tip.fa.fa-exclamation-triangle                    
+            .aclib-form-item
+              input(type='text', name='barcode', placeholder='条形码')                          
+              i.aclib-form-tip.fa.fa-exclamation-triangle                  
+            .aclib-form-item
+              input(type='text', name='intro', placeholder='简介')                       
+              i.aclib-form-tip.fa.fa-exclamation-triangle             
+            .aclib-form-item
+              input(type='text', name='count', placeholder='数量')               
+              i.aclib-form-tip.fa.fa-exclamation-triangle          
+            .aclib-form-item
+              // 分类做成select或者自动补全
+              input(type='text', name='category', placeholder='分类')                
+              i.aclib-form-tip.fa.fa-exclamation-triangle           
+            input#add-submit(type='button', value='添加')         
+            i.fa.fa-spinner
+            i.fa.fa-check-circle.text-success 添加成功
+        // Excel 批量导入
+        .panel
+          h2.panel-title 从Excel导入       
+          br
+          p.text-alert 使用Excel进行导入会覆盖掉之前的数据，请谨慎操作！
+          br
+                   
+          p.text-disabled 点这里下载 
+            a(href='javascript:void(0);') Excel模板
+                   
+          form.aclib-form(method='POST', enctype='multipart/form-data', action='/admin/excelimport')
+            input#excel-import(type='button', onclick='excel.click()', value='批量导入')
+                         
+            input#excel(type='file', name='excel', multiple='multiple')
+                         
+            input.hidden(type='submit')
+
+      .layer.f-l(ms-if="current == 'user'")
+        // 添加用户
+        .panel
+          h2.panel-title 添加用户       
+          form.aclib-form
+            .aclib-form-item
+              input(type='text', name='username', placeholder='用户名')      
+              i.aclib-form-tip.fa.fa-exclamation-triangle
+            .aclib-form-item
+              input(type='text', name='nickname', placeholder='昵称')
+              i.aclib-form-tip.fa.fa-exclamation-triangle
+            .aclib-form-item
+              input(type='text', name='department', placeholder='部门')                        
+              i.aclib-form-tip.fa.fa-exclamation-triangle                    
+
+            input#add-submit(type='button', value='添加')         
+            i.fa.fa-spinner
+            i.fa.fa-check-circle.text-success 添加成功
+
+         // Excel 批量导入
+        .panel
+          h2.panel-title 从Excel导入       
+                   
+          p.text-disabled 点这里下载 
+            a(href='javascript:void(0);') Excel模板
+                   
+          form.aclib-form(method='POST', enctype='multipart/form-data', action='/admin/excelimport')
+            input#excel-import(type='button', onclick='excel.click()', value='批量导入')
+                         
+            input#excel(type='file', name='excel', multiple='multiple')
+                         
+            input.hidden(type='submit')
 
 block scripts
   script(src='/static/admin/book.entry.js')

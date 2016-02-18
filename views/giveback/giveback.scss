@@ -1,0 +1,22 @@
+@import "../common/colors.scss";
+
+.log-list {
+    td {
+        cursor: pointer;
+        padding: 4px 16px;
+    }
+    
+    .log-date {
+        color: $grey;
+    }
+
+    .log-giveback {
+        color: $ac_red;
+        opacity: 0;
+        transition: all ease-in-out .2s; 
+    }
+
+    tr:hover .log-giveback {
+        opacity: 1;
+    }
+}

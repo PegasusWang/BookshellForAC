@@ -28,18 +28,21 @@ $(document).ready ->
 
         # 验证全部通过之后发请求
         if validation
-            form_data = $self.serialize() 
+            form_data = {
+                username: $username.val()
+                password: hex_md5($password.val())
+            }
             $.ajax({
-                url: '/login'
+                url: '/auth/login'
                 type: 'POST'
                 data: form_data
                 dataType: 'json'
                 success: (data)->
-                    if data.status is 'admin'
-                        window.location.href = "/admin?user=" + data.user
-                    else if data.status is 'user'
-                        window.location.href = "/?user=" + data.user
+                    if (data.status == 'admin')
+                        window.location.href = "/admin"
+                    else
+                        window.location.href = "/"
                 error: ->
-                    $password.focus().next().show()
                     $username.focus().next().show()
+                    $password.val("").focus().next().show()
             });

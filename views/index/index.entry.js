@@ -34,7 +34,7 @@
 /******/ 	__webpack_require__.c = installedModules;
 
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "static/";
+/******/ 	__webpack_require__.p = "http://127.0.0.1:8080/static/";
 
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(0);
@@ -45,7 +45,7 @@
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(16);
+	__webpack_require__(29);
 
 	window.render_book_list = function(data) {
 	  var $book_panel, vm_book, vm_book_list;
@@ -53,12 +53,79 @@
 	  vm_book = avalon.define({
 	    $id: "book",
 	    data: void 0,
-	    go: function(item) {
-	      if (vm_book.data && item.$model._id === vm_book.data.$model._id) {
-	        return $book_panel.fadeToggle(300);
+	    action: "",
+	    hide: function() {
+	      return $book_panel.fadeOut(300);
+	    },
+	    borrow: function() {
+	      var book;
+	      if (avalon.vmodels.nav.uid) {
+	        book = vm_book.data.$model;
+	        return swal({
+	          title: "借阅确认",
+	          text: "《" + book.title + "》",
+	          type: "info",
+	          showCancelButton: false,
+	          confirmButtonText: "确认借阅",
+	          closeOnConfirm: false,
+	          html: false
+	        }, function() {
+	          return $.ajax({
+	            url: '/book/borrow',
+	            method: 'POST',
+	            data: {
+	              bid: book._id
+	            },
+	            success: function(data) {
+	              console.log(data);
+	              if (data.status === 'ok') {
+	                book.locate = data.locate;
+	                vm_book.action = "giveback";
+	                swal("借阅成功!", "《" + book.title + "》", "success");
+	                return vm_book.hide();
+	              } else {
+	                return swal("借阅失败!", data.err, "error");
+	              }
+	            }
+	          });
+	        });
 	      } else {
-	        vm_book.data = item;
-	        return $book_panel.fadeIn(300);
+	        return window.location.href = "/auth/login";
+	      }
+	    },
+	    giveback: function() {
+	      var book;
+	      if (avalon.vmodels.nav.uid) {
+	        book = vm_book.data.$model;
+	        return swal({
+	          title: "还书确认",
+	          text: "《" + book.title + "》",
+	          type: "info",
+	          showCancelButton: false,
+	          confirmButtonText: "确认还书",
+	          closeOnConfirm: false,
+	          html: false
+	        }, function() {
+	          return $.ajax({
+	            url: '/book/giveback',
+	            method: 'POST',
+	            data: {
+	              bid: book._id
+	            },
+	            success: function(data) {
+	              if (data.status === 'ok') {
+	                book.locate = data.locate;
+	                vm_book.action = "borrow";
+	                swal("还书成功!", "《" + book.title + "》", "success");
+	                return vm_book.hide();
+	              } else {
+	                return swal("还书失败!", data.err, "error");
+	              }
+	            }
+	          });
+	        });
+	      } else {
+	        return window.location.href = "/auth/login";
 	      }
 	    }
 	  });
@@ -69,10 +136,15 @@
 	    searching: false,
 	    go: function(item) {
 	      if (vm_book.data && item.$model._id === vm_book.data.$model._id) {
-	        return $book_panel.fadeToggle(100);
+	        $book_panel.fadeToggle(100);
 	      } else {
 	        vm_book.data = item;
-	        return $book_panel.fadeIn(100);
+	        $book_panel.fadeIn(100);
+	      }
+	      if (vm_book.data.locate.indexOf(avalon.vmodels.nav.uid) < 0) {
+	        return vm_book.action = "borrow";
+	      } else {
+	        return vm_book.action = "giveback";
 	      }
 	    }
 	  });
@@ -146,7 +218,7 @@
 
 /***/ },
 
-/***/ 16:
+/***/ 29:
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin

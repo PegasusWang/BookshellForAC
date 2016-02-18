@@ -35,6 +35,10 @@ body {
   }
 }
 
+.f-l {
+  float: left;
+}
+
 .clearfix {
   zoom: 1;
 
@@ -56,11 +60,42 @@ body {
   
   .panel-title {
     font-weight: normal;
+    font-size: 14px;
     border-bottom: 1px dashed $light_grey;
     line-height: 22px;
     padding-bottom: 5px;
     margin-bottom: 10px;
   }
+}
+
+.layer-nav {
+  font-size: 14px;
+  padding-top: 20px;
+
+  li {
+    line-height: 40px;
+    height: 40px;
+    background-color: #fff;
+    margin-left: -20px;
+    padding-left: 20px;
+    padding-right: 33px;
+    transition: all ease-in-out .2s;
+    cursor: pointer;
+    
+    &.active {
+      background-color: $light_grey;
+    }
+
+    &:hover {
+      color: #fff;
+      background-color: $ac_red;
+    }
+  }
+}
+
+.layer {
+  padding-left: 20px;
+  border-left: 1px solid rgba(245, 245, 245, 0.5);
 }
 
 /* 表单样式 */
@@ -181,6 +216,7 @@ body {
   position: fixed;
   z-index: 10;
   width: 100%;
+  min-width: 900px;
   height: 60px;
   line-height: 60px;
   font-size: 16px;
@@ -221,7 +257,8 @@ body {
     height: 61px;
 
     li {
-      width: 70px;
+      width: 60px;
+      font-size: 14px;
       text-align: center;
       cursor: pointer;
       float: left;
@@ -319,8 +356,17 @@ body {
 /* footer */
 .footer {
   text-align: center;
-  color: $grey;
   padding: 30px 0;
+
+  & small {
+    cursor: pointer;
+    color: #ddd;
+    transition: all ease-in-out .2s;
+  }
+  
+  & small:hover {
+    color: $grey;
+  }
 }
 
 /* about */
