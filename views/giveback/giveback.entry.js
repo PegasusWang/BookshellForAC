@@ -51,7 +51,47 @@
 	  var vm_log_list;
 	  return vm_log_list = avalon.define({
 	    $id: "log_list",
-	    data: data
+	    data: data,
+	    giveback: function(elem) {
+	      var book;
+	      if (avalon.vmodels.nav.uid) {
+	        book = elem.$model;
+	        console.log(elem);
+	        return swal({
+	          title: "还书确认",
+	          text: "《" + book.bname + "》",
+	          type: "info",
+	          showCancelButton: true,
+	          confirmButtonText: "确认还书",
+	          cancelButtonText: "取消",
+	          closeOnConfirm: false,
+	          html: false
+	        }, function() {
+	          return $.ajax({
+	            url: '/book/giveback',
+	            method: 'POST',
+	            data: {
+	              bid: book.bid
+	            },
+	            success: function(data) {
+	              if (data.status === 'ok') {
+	                return swal({
+	                  title: "还书成功!",
+	                  text: "《" + book.bname + "》",
+	                  type: "success"
+	                }, function() {
+	                  return window.location.reload();
+	                });
+	              } else {
+	                return swal("还书失败!", data.err, "error");
+	              }
+	            }
+	          });
+	        });
+	      } else {
+	        return window.location.href = "/auth/login";
+	      }
+	    }
 	  });
 	};
 

@@ -50,23 +50,24 @@
 	window.render_book_list = function(data) {
 	  var $book_panel, vm_book, vm_book_list;
 	  $book_panel = $(".book-panel");
+	  $(window).scroll(function() {
+	    return $book_panel.fadeOut(300);
+	  });
 	  vm_book = avalon.define({
 	    $id: "book",
 	    data: void 0,
 	    action: "",
-	    hide: function() {
-	      return $book_panel.fadeOut(300);
-	    },
 	    borrow: function() {
 	      var book;
-	      if (avalon.vmodels.nav.uid) {
+	      if (avalon.vmodels.nav.$model.uid) {
 	        book = vm_book.data.$model;
 	        return swal({
 	          title: "借阅确认",
 	          text: "《" + book.title + "》",
 	          type: "info",
-	          showCancelButton: false,
+	          showCancelButton: true,
 	          confirmButtonText: "确认借阅",
+	          cancelButtonText: "取消",
 	          closeOnConfirm: false,
 	          html: false
 	        }, function() {
@@ -101,8 +102,9 @@
 	          title: "还书确认",
 	          text: "《" + book.title + "》",
 	          type: "info",
-	          showCancelButton: false,
+	          showCancelButton: true,
 	          confirmButtonText: "确认还书",
+	          cancelButtonText: "取消",
 	          closeOnConfirm: false,
 	          html: false
 	        }, function() {
@@ -116,8 +118,7 @@
 	              if (data.status === 'ok') {
 	                book.locate = data.locate;
 	                vm_book.action = "borrow";
-	                swal("还书成功!", "《" + book.title + "》", "success");
-	                return vm_book.hide();
+	                return swal("还书成功!", "《" + book.title + "》", "success");
 	              } else {
 	                return swal("还书失败!", data.err, "error");
 	              }
@@ -157,7 +158,7 @@
 	      winHeight = $(window).height();
 	      if (scrollTop + 200 + winHeight >= domHeight) {
 	        $(document).unbind("scroll");
-	        window.loading(50, 1000);
+	        window.loading('start');
 	        return $.ajax({
 	          url: '/loadmore',
 	          method: 'POST',
@@ -165,12 +166,12 @@
 	            skip: vm_book_list.data.$model.length
 	          },
 	          success: function(data) {
-	            window.loading(100, 400);
+	            window.loading('end');
 	            vm_book_list.data.pushArray(data.data_books);
 	            if (data.data_books.length === 30) {
 	              return $(document).scroll(scrollLoad);
 	            } else {
-	              return $(".book-list").after("<p class='nomore'>╮(╯_╰)╭只有这些了，再翻也没有啦</p>");
+	              return $(".nomore").show();
 	            }
 	          }
 	        });
@@ -179,15 +180,14 @@
 	    return $(document).scroll(scrollLoad);
 	  });
 	  return $(document).ready(function() {
-	    return $(".nav-search-input input").keyup(function() {
-	      var query;
-	      query = $(this).val();
+	    var search;
+	    search = function(query) {
 	      if (query) {
 	        if ($(".nomore")) {
 	          $(".nomore").hide();
 	        }
 	        vm_book_list.searching = true;
-	        window.loading(50, 1000);
+	        window.loading('start');
 	        return $.ajax({
 	          url: '/search',
 	          method: 'POST',
@@ -195,14 +195,12 @@
 	            q: query
 	          },
 	          success: function(data) {
-	            window.loading(100, 400);
 	            vm_book_list.search_data = data.data_books;
-	            if ($(".noresult")) {
-	              $(".noresult").remove();
-	            }
+	            $(".noresult").hide();
 	            if (data.data_books.length === 0) {
-	              return $(".search-results").after("<p class='noresult'>╮(╯_╰)╭没搜到啊~，换个词试试</p>");
+	              $(".noresult").show();
 	            }
+	            return window.loading('end');
 	          }
 	        });
 	      } else {
@@ -210,6 +208,21 @@
 	        if ($(".nomore")) {
 	          return $(".nomore").show();
 	        }
+	      }
+	    };
+	    $(".nav-search-input input").keyup(function() {
+	      return search($(this).val());
+	    });
+	    return $(".cat-link").parent().click(function() {
+	      var query;
+	      if (!$(this).hasClass("active")) {
+	        $(this).siblings().removeClass("active");
+	        $(this).addClass("active");
+	        query = $(this).find(".cat-link").text();
+	        if (query === "全部") {
+	          query = "";
+	        }
+	        return search(query);
 	      }
 	    });
 	  });

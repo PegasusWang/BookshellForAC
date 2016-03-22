@@ -3,8 +3,6 @@
 .book-list,
 .search-results {
     width: 100%;
-    margin-left: -15px;
-    margin-right: -15px;
 
     .book {
         height: 70px; 
@@ -19,49 +17,16 @@
         }
 
         & td:first-child {
-            padding-left: 15px;
+            padding-left: 20px;
         }
 
         & td:last-child {
             text-align: right;
-            padding-right: 21px;
-            transition: all ease-in-out .2s;
-
-            &:before {
-                position: absolute;
-                color: #fff;
-                content: "\f00c 还有呢";
-                font: normal normal normal 14px/1 FontAwesome;
-                text-rendering: auto;
-                -webkit-font-smoothing: antialiased;
-                -moz-osx-font-smoothing: grayscale;
-                top: -1px;
-                right: 0;
-                opacity: 0;
-                height: 71px;
-                width: 71px;
-                line-height: 71px;
-                text-align: center;
-                background-color: $light_green;
-                transition: all ease-in-out .2s;
-            }  
-
-            &.unavailable:before {
-                content: "\f00d 没有啦";
-                background-color: $ac_red;
-            } 
+            padding-right: 20px;
         }
 
         &:hover {
             background-color: $light_grey;
-            
-            td:last-child {
-                padding-right: 90px;
-
-                &:before {
-                    opacity: 1;
-                }
-            }  
         }
     }
 }
@@ -78,7 +43,7 @@
     background-color: $ac_red;
     background-position-y: -2px;
     display: none;
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 17px #aaa;
 
     .book-detail {
         float: left;
@@ -103,30 +68,6 @@
             box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.36);
         }
     }
-
-    .book-cancel {
-        position: absolute;
-        right: 50%;
-        bottom: 3px;
-        cursor: pointer;
-        text-align: center;
-        
-        .fa {
-            position: relative;
-            top: 0;
-            font-size: 20px;
-            transition: all ease-in-out .1s;
-            color: rgba(255, 255, 255, 0.5);
-            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
-        }
-
-        &:hover {
-            .fa {
-                top: -2px;
-                color: #fff;
-            }
-        }
-    }
 }
 
 .nomore,
@@ -135,4 +76,5 @@
   text-align: center;
   padding-top: 30px;
   font-size: 16px;
+  display: none;
 }

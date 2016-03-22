@@ -1,6 +1,6 @@
 .log-list td {
   cursor: pointer;
-  padding: 4px 16px; }
+  padding: 4px 16px 4px 0; }
 
 .log-list .log-date {
   color: #AAA; }

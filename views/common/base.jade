@@ -41,7 +41,28 @@ html
                             span {{user}}
                             a.nav-logout(href="/auth/logout") 退出 
                                 i.fa.fa-times-circle
-                        
+
+            // category nav
+            .category(ms-controller="nav", ms-if="nav_search")
+                ul.container
+                    li.active
+                        a.cat-link(href="javascript:void(0)") 全部
+                    li 
+                        a.cat-link(href="javascript:void(0)") 产品
+                    li 
+                        a.cat-link(href="javascript:void(0)") 设计
+                    li 
+                        a.cat-link(href="javascript:void(0)") 财务
+                    li 
+                        a.cat-link(href="javascript:void(0)") 金融
+                    li 
+                        a.cat-link(href="javascript:void(0)") 管理
+                    li 
+                        a.cat-link(href="javascript:void(0)") 运营
+                    li 
+                        a.cat-link(href="javascript:void(0)") 计算机
+                    li 
+                        a.cat-link(href="javascript:void(0)") 文学         
 
         block content
             // content 

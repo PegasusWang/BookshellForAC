@@ -1,4 +1,4 @@
-require("admin/book.scss");
+require("admin/admin.scss");
 
 # 控制切换
 vm_layer = avalon.define({

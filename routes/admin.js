@@ -15,7 +15,7 @@ router.use(auth.isAdmin);
 
 // 管理
 router.get('/', function (req, res) {
-    res.render('admin/book', {user: req.session.user, isadmin: req.session.isadmin});
+    res.render('admin/admin', {user: req.session.user, isadmin: req.session.isadmin});
 });
 
 // 添加图书

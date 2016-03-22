@@ -61,7 +61,7 @@ router.post('/search', function (req, res) {
 router.get('/giveback', auth.isLogin, function (req, res) {
     Log.find({'uid': req.session.uid}).exec(function (err, logs) {
         if (err) throw err;
-        res.render('giveback/giveback', {user: req.session.user, isadmin: req.session.isadmin, logs: JSON.stringify(logs)});
+        res.render('giveback/giveback', {user: req.session.user, isadmin: req.session.isadmin, logs: JSON.stringify(logs), 'uid': req.session.uid});
     });
 });
 
